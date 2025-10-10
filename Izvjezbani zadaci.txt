@@ -1,0 +1,413 @@
+ZAD 1.
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+int duzina(const char *a){
+    int brojac=0;
+  
+  for(int i=0; a[i]!='\0';i++){
+      brojac++;
+  }
+    
+    return brojac;
+}
+
+
+int jesuLiJednaki(const char *a, const char*b, int n){
+    
+    if(duzina(a)<n || duzina(b) < n){
+        return 0;
+    }
+    
+    for(int i=0; i<n; i++){
+        if(a[i] != b[i]){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+
+int main()
+{
+    
+    char a[26];
+    
+    fgets(a, sizeof(a), stdin);
+    
+    int len=duzina(a);
+    
+    if(a[len-1] == '\n'){
+        a[len-1] == '\0';
+    }
+    
+    int rezultat1 = jesuLiJednaki(a, "Moram da shvatim!", 2);
+    printf("rezultat %d\n", rezultat1);
+    int rezultat2 = jesuLiJednaki(a, "Moram da shvatim!",5);
+    printf("rezultat %d", rezultat2);
+    
+    return 0;
+}
+
+
+ZAD 2. 
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+double funkcija(double a[]){
+    double x = 0;
+    for(int i=2; i<19; i++){
+        x  += (a[i-1] + (2*(a[i+1]))) / (pow(a[i], 2) + (pow(10,-3)));
+    }
+    return x;
+}
+
+int main()
+{
+    
+    double a[20];
+    srand(time(NULL));
+    
+    for(int i=0; i<20; i++){
+        a[i] = ((double)rand() / RAND_MAX) * ((2*3.14) - (-2*(3.14))) -(-2*3.14);
+    }
+    
+    double rezultat = funkcija(a);
+    printf("%.2f", rezultat);
+    
+    return 0;
+}
+
+
+ZAD 3.
+
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+int odredivanjeBrojaDijelitelja(int x){
+    int brojac=0;
+    for(int i=1; i<=x; i++){
+        if(x%i == 0){
+            brojac++;
+        }
+    }
+    return brojac;
+}
+
+int najveciBroj(int n, int m){
+    int max=0;
+    int broj = odredivanjeBrojaDijelitelja(m);
+    
+    for(int i=n ; i<=m; i++){
+        int trenutniBroj = odredivanjeBrojaDijelitelja(i);
+        if(trenutniBroj > broj ){
+            max = i;
+           broj = trenutniBroj;
+        }
+    }
+    return max;
+}
+
+int main()
+{
+    int donja, gornja;
+    
+    do{
+        scanf("%d", &gornja);
+        scanf("%d", &donja);
+    }while(gornja<donja);
+    
+    int rezultat = najveciBroj(donja,gornja);
+    
+    printf("%d", rezultat);
+    
+    return 0;
+}
+
+
+
+ZAD 4.
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
+
+double pseudoSlucajno(int n){
+    double x;
+    
+    do{
+        x = ((double)rand() / RAND_MAX) * ((n*n) - (-(n*n)))+ n*n;
+    }while(x>=(-n) && x< 2*n);
+    
+    return x;
+}
+
+
+int main()
+{
+    int n;
+    srand(time(NULL));
+    
+    do{
+        scanf("%d", &n);
+    }while(n<15 || n>=25 && n%2!=0);
+    
+    double mat[n][n];
+    
+    for(int i=0; i<n;i++){
+        for(int j=0; j<n;j++){
+            mat[i][j] = pseudoSlucajno(n);
+        }
+    }
+    
+    double najvecaVrijednostGore=0;
+    double najvecaVrijednostDole=0;
+    int gornjiRed;
+    int donjiRed;
+    
+    for(int i=0; i<n/2; i++){
+        for(int j=0; j<n; j++){
+            if(najvecaVrijednostGore < mat[i][j]){
+                najvecaVrijednostGore = mat[i][j];
+                gornjiRed = i;
+            }
+        }
+    }
+    
+        for(int i=n/2; i<n; i++){
+        for(int j=0; j<n; j++){
+            if(najvecaVrijednostDole < mat[i][j]){
+                najvecaVrijednostDole = mat[i][j];
+                donjiRed = i;
+            }
+        }
+    }
+    
+    printf("udaljene su %d", abs(gornjiRed-donjiRed));
+    return 0;
+}
+
+
+
+ZAD 5.
+
+
+#include <stdio.h>
+#include <string.h>
+
+int jeLiProst(int broj){
+    if(broj<2){
+        return 0;
+    }
+    
+    for(int i=2; i*i <= broj; i++){
+        if(broj%i==0) return 0;
+    }
+    return 1;
+}
+
+int brojProstihBrojeva(const char *a){
+    int count =0;
+    
+    for(int i=0; a[i]!='\0'; i++){
+        int ascii = (int)a[i];
+        if(jeLiProst(ascii)){
+            count++;
+        }
+    }
+    
+    return count;
+}
+
+int main()
+{
+    char a[45];
+    
+    fgets(a, sizeof(a), stdin);
+    
+    size_t len = strlen(a);
+    
+    if(len > 0 && a[len-1] == '\n'){
+        a[len-1] == '\0';
+    }
+    
+     int rezultat = brojProstihBrojeva(a);
+     printf("%d\n", rezultat);
+     
+     rezultat = brojProstihBrojeva("?!Kako je!?");
+     printf("%d", rezultat);
+    
+
+    return 0;
+}
+
+
+
+ZAD 6.
+
+#include <stdio.h>
+
+
+double art(double *a){
+    double sum =0;
+    
+    for(int i=0; i<15; i++){
+        sum += a[i];
+    }
+    
+    if(sum == 0){
+        return 0;
+    }
+    
+    return sum/15;
+}
+
+
+double kvocijent(double *a){
+    int brV=0, brM =0;
+    double aritmeticka = art(a);
+    
+    for(int i=0; i<15;i++){
+        if(a[i]>aritmeticka){
+            brV++;
+        }else{
+            brM++;
+        }
+    }
+    
+    if(brM == 0){
+        return 0;
+    }
+    return (double)brV/brM;
+}
+
+
+int main()
+{
+    double a[15];
+    
+    for(int i=0; i<15; i++){
+        scanf("%lf", &a[i]);
+    }
+    
+    
+    double rezultat = kvocijent(a);
+    
+    printf("%.2f", rezultat);
+    return 0;
+}
+
+
+ZAD 7. 
+
+#include <stdio.h>
+
+int najvecaZnamenka(int n){
+    
+    int max=0;
+    
+    if(n==0){
+        return 0;
+    }
+    while(n>0){
+        int x = n%10;
+        if(x>max){
+            max = x;
+        }
+        
+        n /=10;
+    }
+    return max;
+}
+
+int najmanjaZnamenka(int n){
+    int min=9;
+    
+    while(n>0){
+        int x=n%10;
+        if(x<min){
+            min =x;
+        }
+        n /=10;
+    }
+    return min;
+}
+
+
+int main()
+{
+    
+    int n;
+    int max, min;
+    
+    do{
+        scanf("%d", &n);
+        max=najvecaZnamenka(n);
+        min=najmanjaZnamenka(n);
+    }while(min*min != max);
+    
+    printf("%d\n", max);
+    printf("%d", min);
+    return 0;
+}
+
+
+ZAD 8. 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+
+int main()
+{
+    int n;
+    double max=0;
+    do{
+        scanf("%d", &n);
+    }while(n<11 || n>=26 && n%2 == 0);
+    
+    double mat[n][n];
+    
+    for(int i=0; i<n;i++){
+        for(int j=0; j<n; j++){
+            mat[i][j] = ((double)rand() / RAND_MAX) *((2*n)-(-(n*n)))+(-(n*n));
+        } 
+    }
+    
+    for(int i=0; i<n;i++){
+        for(int j=0; j<n; j++){
+            if(mat[i][j]>max){
+                max = mat[i][j];
+            }
+        }
+    }
+    
+    double granica = 0.4 *n;
+    
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            if(fabs(mat[i][j]-max) >= granica){
+                mat[i][j] = 0;
+            }
+        }
+    }
+
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            printf("%f", mat[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
