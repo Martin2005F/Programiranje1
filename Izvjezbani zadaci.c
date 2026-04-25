@@ -1,4 +1,4 @@
-ZAD 1.
+//ZAD 1.
 
 #include <stdio.h>
 #include <math.h>
@@ -53,7 +53,7 @@ int main()
 }
 
 
-ZAD 2. 
+//ZAD 2. 
 
 #include <stdio.h>
 #include <math.h>
@@ -85,7 +85,7 @@ int main()
 }
 
 
-ZAD 3.
+//ZAD 3.
 
 
 #include <stdio.h>
@@ -134,7 +134,7 @@ int main()
 
 
 
-ZAD 4.
+//ZAD 4.
 
 #include <stdio.h>
 #include <math.h>
@@ -198,7 +198,7 @@ int main()
 
 
 
-ZAD 5.
+//ZAD 5.
 
 
 #include <stdio.h>
@@ -252,7 +252,7 @@ int main()
 
 
 
-ZAD 6.
+//ZAD 6.
 
 #include <stdio.h>
 
@@ -307,7 +307,7 @@ int main()
 }
 
 
-ZAD 7. 
+//ZAD 7. 
 
 #include <stdio.h>
 
@@ -361,7 +361,7 @@ int main()
 }
 
 
-ZAD 8. 
+//ZAD 8. 
 
 #include <stdio.h>
 #include <stdlib.h>
