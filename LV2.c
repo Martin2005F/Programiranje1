@@ -1,5 +1,3 @@
-ZADATAK 1.
-
 
 #include<stdio.h>
 
@@ -26,7 +24,6 @@ int main(void) {
 }
 
 
-Zadatak 2.
 
 
 #include<stdio.h>
